@@ -27,11 +27,11 @@ public class Player : MonoBehaviour
         Vertical_Direciton = y_axis;
         
         if(x_axis <= -.01){
-            // animator.SetBool("Flip_x",true);
+            //transform.localRotation = Quaternion.Euler(x_direction, y_direction, z_direction);
             transform.localRotation = Quaternion.Euler(0, 180, 0);
         }else if(x_axis >= .01){
+            //transform.localRotation = Quaternion.Euler(x_direction, y_direction, z_direction);
             transform.localRotation = Quaternion.Euler(0, 0, 0);
-            // animator.SetBool("Flip_x", false);
         }
 
         animator.SetFloat("Horizontal",Horizontal_Direction);
@@ -44,6 +44,10 @@ public class Player : MonoBehaviour
      void Move_Player(){
         rb.MovePosition(rb.position + movement * Movspeed * Time.fixedDeltaTime);
      }
+
+     void Attack(){
+        animator.SetTrigger("Attack_1");
+     }
     // Update is called once per frame
     // Variable rate of frames, not good for physics
     void Update()
@@ -52,10 +56,14 @@ public class Player : MonoBehaviour
         
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0)) { Attack(); };
+        
     }
 
     //Called 50 times a second, Best for physics
     void FixedUpdate(){
        Move_Player();
+       //Attack();
     }
 }
