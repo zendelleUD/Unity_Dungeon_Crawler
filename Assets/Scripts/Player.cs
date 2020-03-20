@@ -15,12 +15,14 @@ public class Player : MonoBehaviour
     //Meantsfor debugging in Unity Ide
     public float Horizontal_Direction;
     public float Vertical_Direciton;
+    public bool die;
 
 
 
     void Start(){
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth); 
+        healthBar.SetMaxHealth(maxHealth);
+        die = animator.GetBool("Die"); 
     }
 
 
@@ -63,6 +65,8 @@ public class Player : MonoBehaviour
      void TakeDamage(int damage){
         currentHealth -= damage ;
         healthBar.SetHealth(currentHealth);
+        if (currentHealth <= 0){
+        animator.SetTrigger("Die");}
      }
 
     // Update is called once per frame
