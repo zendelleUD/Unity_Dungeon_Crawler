@@ -9,7 +9,6 @@ public class Base_View : MonoBehaviour
     public Base_Controller controller;
 
     [Header("References")]
-    public Animator animator;
     public Health_Bar healthBar;
     public Rigidbody2D rb;
     public Vector2 current_Position;
@@ -37,7 +36,8 @@ public class Base_View : MonoBehaviour
             controller.UpdatePlayerPosition(Vector2 postion)
     */
     void Move_Player(){
-        rb.MovePosition(current_Position);
+        
+        rb.MovePosition(RbPosition);
     }
 
     public void RotateRight(){
@@ -50,11 +50,20 @@ public class Base_View : MonoBehaviour
 
     // Update is called once per frame
     void Update(){ 
-        
+        controller.UpdatePlayer();
     }
 
     //Called 50 times a second
     void FixedUpdate(){
         Move_Player();
     }
+
+
+
+    public Vector2 RbPosition{
+        get {return rb.position;} set{rb.position = value;}
+    }
+
+
+
 }

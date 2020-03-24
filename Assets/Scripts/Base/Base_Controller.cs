@@ -10,6 +10,8 @@ public class Base_Controller : MonoBehaviour
     [Header("Object References")]
     public Base_Model model;
     public Base_View view;
+    public Animator animator;
+
 
     Vector2 userInput;
 
@@ -18,6 +20,22 @@ public class Base_Controller : MonoBehaviour
 
     void Start(){
         view.UpdateMaxHealth(model.maxHealth);
+
+    }
+
+
+    public void UpdatePlayer(){
+        GetUserInput();
+        UpdateAnimator();
+        UpdatePlayerPosition(view.rb);
+        FlipPlayer();
+
+    }
+
+    private void UpdateAnimator(){
+        animator.SetFloat("Horizontal", userInput.x);
+        animator.SetFloat("Vertical",userInput.y);
+        if(Input.GetMouseButtonDown(0)){animator.SetTrigger("Attack_1");}
 
     }
 
@@ -48,12 +66,10 @@ public class Base_Controller : MonoBehaviour
     Return:
         Vector2 newPlayer_Position
     */
-    public void UpdatePlayerPosition(Vector2 current_Position){
-        Vector2 oldPosition = current_Position;
-        GetUserInput();
-        newPlayer_Position = (current_Position + userInput * (GetMoveSpeed()) * Time.fixedDeltaTime);
-        view.rb.position = newPlayer_Position;
-        FlipPlayer();
+    private void UpdatePlayerPosition(Rigidbody2D PLayerRigidBody){
+        Vector2 oldPosition = PLayerRigidBody.position;
+        newPlayer_Position = (oldPosition + userInput * (GetMoveSpeed()) * Time.fixedDeltaTime);
+        view.RbPosition = newPlayer_Position;
         
     }
 
@@ -64,7 +80,7 @@ public class Base_Controller : MonoBehaviour
     Vector2 userInput
     Input.GetAxisRaw(string param) returns Vector2 
     */
-    void GetUserInput(){
+    private void GetUserInput(){
         userInput.x = Input.GetAxisRaw("Horizontal");
         userInput.y = Input.GetAxisRaw("Vertical");
     }
@@ -72,13 +88,8 @@ public class Base_Controller : MonoBehaviour
     /*
     Returns Player movement speed
     */
-    public int GetMoveSpeed(){
+    private int GetMoveSpeed(){
         return model.GetMoveSpeed();
-    }
-
-
-    void FixedUpdate(){
-        
     }
     
 
