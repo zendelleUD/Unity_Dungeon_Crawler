@@ -5,6 +5,7 @@ using UnityEngine;
 public class Dropped_Weapon : MonoBehaviour
 {
    
+
     public void DeleteDroppedItem(){
         Destroy(gameObject);
     }
