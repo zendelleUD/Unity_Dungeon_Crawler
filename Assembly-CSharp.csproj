@@ -58,8 +58,8 @@
      <Compile Include="Assets\Scripts\Base\Base_View.cs" />
      <Compile Include="Assets\Scripts\Camera_Follow.cs" />
      <Compile Include="Assets\Scripts\IInteract.cs" />
-     <Compile Include="Assets\Scripts\Interactables.cs" />
-     <Compile Include="Assets\Scripts\Player_\Player.cs" />
+     <Compile Include="Assets\Scripts\Interactables\Dropped_Weapon.cs" />
+     <Compile Include="Assets\Scripts\Interactables\Interactable.cs" />
      <Compile Include="Assets\Scripts\test.cs" />
      <Compile Include="Assets\Scripts\UI\Health_Bar.cs" />
      <None Include="Assets\Sprites\generic-rpg-pack_v0.3_(alpha-release)_vacaroxa\release.txt" />
